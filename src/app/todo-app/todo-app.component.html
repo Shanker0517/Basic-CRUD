@@ -1,0 +1,162 @@
+<div class="container">
+  <h2>Todo</h2>
+  <div class="box">
+    <form>
+      <div class="form-control formcontaier">
+        <div>
+          <label>Todo Name:</label>
+          <input
+            class="form-control input"
+            [(ngModel)]="todoName"
+            type="text"
+            name="todoName"
+            value="{{ todoName }}"
+          />
+        </div>
+        <div>
+          <label>Todo Description:</label>
+          <input
+            class="form-control input"
+            [(ngModel)]="tododescription"
+            type="text"
+            name="tododescription"
+            value="{{ tododescription }}"
+          />
+        </div>
+        <div class="mg 5">
+          <label>Completed:</label>
+          <input
+            class="form-check-input checkboxsize"
+            [(ngModel)]="todoisDone"
+            type="checkbox"
+            name="todoisDone"
+            value="{{ todoisDone }}"
+          />
+        </div>
+        <br />
+        <button
+          type="button"
+          class="btn btn-primary"
+          (click)="onSubmit(todoName, tododescription, todoisDone)"
+        >
+          Add Todo
+        </button>
+      </div>
+    </form>
+  </div>
+  <div class="tablecontainer">
+    <div *ngIf="TodoList.length === 0; else elseBlock">add todo</div>
+    <ng-template #elseBlock>
+      <div class="table">
+        <table class="table">
+          <thead>
+            <tr>
+              <td>Id</td>
+              <td>Todo Name</td>
+              <td>Todo Description</td>
+              <td>Todo is Done</td>
+              <td>Action</td>
+            </tr>
+          </thead>
+          <tbody *ngFor="let Todo of TodoList; index as i" class="listyle">
+            <tr>
+              <ng-container
+                *ngIf="editMode && Todo.id === editId; else elseBlock"
+              >
+                <td>{{ i + 1 }}</td>
+                <td>
+                  <input
+                    class="form-control input"
+                    type="text"
+                    [(ngModel)]="editTodoName"
+                  />
+                </td>
+                <td>
+                  <input
+                    class="form-control input"
+                    type="text"
+                    [(ngModel)]="editdescription"
+                  />
+                </td>
+                <td>
+                  <input
+                    class="form-control input"
+                    type="checkbox"
+                    [(ngModel)]="editisDone"
+                  />
+                </td>
+                <td class="buttons">
+                  <button
+                    type="button"
+                    class="btn btn-primary"
+                    (click)="
+                      update({
+                        id: Todo.id,
+                        TodoName: editTodoName,
+                        description: editdescription,
+                        isDone: editisDone
+                      })
+                    "
+                  >
+                    edit
+                  </button>
+
+                  <button
+                    type="button"
+                    class="btn btn-danger btn-sm"
+                    (click)="discart(Todo, editId)"
+                  >
+                    discart
+                  </button>
+                </td>
+              </ng-container>
+              <ng-template #elseBlock>
+                <td>
+                  {{ i + 1 }}
+                </td>
+                <td>
+                  {{ Todo.TodoName }}
+                </td>
+                <td *ngIf="Todo.description; else elseBlock">
+                  {{ Todo.description }}
+                </td>
+                <ng-template #elseBlock>
+                  <td>no Description</td>
+                </ng-template>
+                <td>
+                  <ng-container *ngIf="Todo.isDone; else elsepart">
+                    Done</ng-container
+                  >
+                  <ng-template #elsepart> Not Completed </ng-template>
+                </td>
+
+                <td class="buttons">
+                  <button
+                    type="button"
+                    class="btn btn-primary"
+                    (click)="updateMode(Todo)"
+                  >
+                    edit
+                  </button>
+
+                  <button
+                    type="button"
+                    class="btn btn-danger btn-sm"
+                    (click)="delete(Todo)"
+                  >
+                    delete
+                  </button>
+                </td>
+              </ng-template>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </ng-template>
+    
+  </div>
+  <span *ngIf="TodoList.length>=0 else elsepart"></span>
+  <ng-template #elsepart>
+
+</ng-template>
+</div>

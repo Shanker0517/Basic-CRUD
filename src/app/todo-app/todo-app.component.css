@@ -1,0 +1,37 @@
+.container{
+    width: 700px;
+    /* margin-left: 50px; */
+    margin: 10px 50px;
+}
+.box{
+    display: flex;
+    justify-content: space-between;
+}
+.input{
+    width: 550px;
+    height: 45px;
+}
+.listyle{
+    list-style-type: none;
+}
+.tablecontainer{
+    padding-top: 15px;
+}
+.buttons{
+    display: flex;
+    justify-content: space-evenly;
+}
+td{
+    text-align: center;
+}
+.checkboxsize{
+    margin: 5px;
+    width: 20px;
+    height: 20px;
+}
+.formcontaier{
+    width: 600px;
+    height: 300px;
+    display: flex;
+    flex-direction: column;
+}

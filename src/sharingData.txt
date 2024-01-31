@@ -1,0 +1,32 @@
+sharing the data from component to another component
+-----------------------------------------with @Input-------------------------------------------
+we initialize the variable obviously and sharing the data via a parent component html files
+and in that file we call the selector: 'app-post' like 
+<app-post></app-post>
+and then we will give any key but to the value to the key has to be variable which has initialized
+or varible which holds the data u want to share the from parent component to child component
+"announcement"   announcement:string = 'Hello again Angular!'; 
+[parentData]="announcement"
+<app-post [parentData]="announcement"></app-post>
+then calling in with the name parentData as 
+@Input({ alias: 'parentData' }) parentannouncement: string =''
+or
+@Input() parentData: string =''
+
+
+sharing data from child component to parent component via 2 methods
+1. @ViewChild
+2. @Output and Event Emitter
+
+sharing data from one component to another component if there is no parent child relationship
+then we use dependency injection
+
+
+
+for loop
+<li *ngFor="let Todo of TodoList; index as i">
+        {{i+1}}
+        {{ Todo.TodoName }}
+      </li>
+if 
+<span *ngIf="isFirst">default</span> 

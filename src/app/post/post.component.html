@@ -1,0 +1,20 @@
+<h2>{{ parentannouncement }}</h2>
+<!-- <app-post-list [parentPostListData]="postList"></app-post-list> -->
+<!-- 2 way binding -->
+<!-- <input type="text" (keyup)="handleInput1(Name)" [(ngModel)]="Name"/> -->
+<label>username: </label>
+<input type="text" [(ngModel)]="userName" />
+<br />
+<label>Password: </label>
+<input type="password" [(ngModel)]="password" />
+<br/>
+<button type="submit" (click)="handleSubmit()">Login</button>
+
+<!-- <label>Change Background</label>
+<input type="checkbox" [(ngModel)]="backgroundcolor" /> -->
+<!-- If Else -->
+<!-- <div [style.background-color]="userName ? 'red' : 'blue'">
+  <div *ngIf="userName; else elseBlock">Name is defined: {{ userName }}</div>
+  <ng-template #elseBlock> Name is not defined </ng-template>
+</div> -->
+
