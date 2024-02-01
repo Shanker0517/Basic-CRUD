@@ -17,10 +17,6 @@
 .tablecontainer{
     padding-top: 15px;
 }
-.buttons{
-    display: flex;
-    justify-content: space-evenly;
-}
 td{
     text-align: center;
 }
@@ -34,4 +30,13 @@ td{
     height: 300px;
     display: flex;
     flex-direction: column;
+}
+
+.editinput{
+    width: 150px;
+    height: 45px;
+}
+.checkbox{
+    width: 40px;
+    height: 25px;
 }

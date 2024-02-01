@@ -1,36 +1,68 @@
 <div class="container">
   <h2>Todo</h2>
   <div class="box">
-    <form>
-      <div class="form-control formcontaier">
+    <form [formGroup]="TodoFormData">
+      <div class="form-control formcontaier" style="margin-bottom: 10px">
         <div>
           <label>Todo Name:</label>
           <input
             class="form-control input"
-            [(ngModel)]="todoName"
+            (ngModelChange)="todoName = $event"
             type="text"
             name="todoName"
             value="{{ todoName }}"
+            formControlName="todoName"
           />
+          <div
+            *ngIf="
+              TodoFormData.get('todoName')?.invalid &&
+              TodoFormData.get('todoName')?.touched
+            "
+          >
+            <div style="color: red;"
+              *ngIf="TodoFormData.get('todoName')?.errors?.['required']"
+            >
+            Todo Name required
+            </div>
+          </div>
         </div>
-        <div>
+        <div style="margin-bottom: 10px">
           <label>Todo Description:</label>
           <input
             class="form-control input"
-            [(ngModel)]="tododescription"
+            (ngModelChange)="tododescription = $event"
             type="text"
             name="tododescription"
             value="{{ tododescription }}"
+            formControlName="tododescription"
           />
+          <div
+            *ngIf="
+              TodoFormData.get('tododescription')?.invalid &&
+              TodoFormData.get('tododescription')?.touched
+            "
+          >
+            <div style="color: red;"
+              *ngIf="TodoFormData.get('tododescription')?.errors?.['required']"
+            >
+              Description required
+            </div>
+          </div>
         </div>
-        <div class="mg 5">
+        <div
+          class="form-check form-switch"
+          style="padding: 0px; margin-bottom: 10px"
+        >
           <label>Completed:</label>
           <input
-            class="form-check-input checkboxsize"
-            [(ngModel)]="todoisDone"
+            class="form-check-input checkbox"
+            style="margin-left: 20px"
             type="checkbox"
+            role="switch"
             name="todoisDone"
+            (ngModelChange)="todoisDone = $event"
             value="{{ todoisDone }}"
+            formControlName="todoisDone"
           />
         </div>
         <br />
@@ -66,48 +98,54 @@
                 <td>{{ i + 1 }}</td>
                 <td>
                   <input
-                    class="form-control input"
+                    class="form-control editinput"
                     type="text"
                     [(ngModel)]="editTodoName"
                   />
                 </td>
                 <td>
-                  <input
-                    class="form-control input"
+                  <textarea
+                    class="form-control editinput"
                     type="text"
+                    placeholder="add description"
                     [(ngModel)]="editdescription"
-                  />
+                  >
+                  </textarea>
                 </td>
-                <td>
+                <td class="form-check form-switch">
                   <input
-                    class="form-control input"
+                    class="form-check-input checkbox"
                     type="checkbox"
+                    role="switch"
+                    name="todoisDone"
                     [(ngModel)]="editisDone"
                   />
                 </td>
-                <td class="buttons">
-                  <button
-                    type="button"
-                    class="btn btn-primary"
-                    (click)="
-                      update({
-                        id: Todo.id,
-                        TodoName: editTodoName,
-                        description: editdescription,
-                        isDone: editisDone
-                      })
-                    "
-                  >
-                    edit
-                  </button>
+                <td>
+                  <div>
+                    <button
+                      type="button"
+                      class="btn btn-primary btn-sm"
+                      (click)="
+                        update({
+                          id: Todo.id,
+                          TodoName: editTodoName,
+                          description: editdescription,
+                          isDone: editisDone
+                        })
+                      "
+                    >
+                      edit
+                    </button>
 
-                  <button
-                    type="button"
-                    class="btn btn-danger btn-sm"
-                    (click)="discart(Todo, editId)"
-                  >
-                    discart
-                  </button>
+                    <button
+                      type="button"
+                      class="btn btn-danger btn-sm"
+                      (click)="discart(Todo, editId)"
+                    >
+                      discart
+                    </button>
+                  </div>
                 </td>
               </ng-container>
               <ng-template #elseBlock>
@@ -130,10 +168,10 @@
                   <ng-template #elsepart> Not Completed </ng-template>
                 </td>
 
-                <td class="buttons">
+                <td>
                   <button
                     type="button"
-                    class="btn btn-primary"
+                    class="btn btn-primary btn-sm"
                     (click)="updateMode(Todo)"
                   >
                     edit
@@ -153,10 +191,8 @@
         </table>
       </div>
     </ng-template>
-    
+    <!-- <ngb-pagination [collectionSize]="70" [(page)]="pagination.page" [boundaryLinks]="true" /> -->
   </div>
-  <span *ngIf="TodoList.length>=0 else elsepart"></span>
-  <ng-template #elsepart>
-
-</ng-template>
+  <span *ngIf="TodoList.length >= 0; else elsepart"></span>
+  <ng-template #elsepart> </ng-template>
 </div>
